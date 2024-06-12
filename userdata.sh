@@ -1,10 +1,8 @@
 #!/bin/bash
-sudo apt-get update -y
-sudo apt-get install -y python3 python3-pip git
-git clone https://github.com/Hemayuva/USA-Housing.git /home/ubuntu/USA-housing
-cd /home/ubuntu/USA-housing
+sudo yum install git -y
+sudo git clone https://github.com/kaasu-pavani/car-prediction.git
+cd /
+cd car-prediction/
+sudo yum install python3 python3-pip -y
 pip3 install -r requirements.txt
-python3 app.py
-screen -m python3 app.py
-screen -m -d python3 app.py
-
+screen -m -d python3 app.py 
