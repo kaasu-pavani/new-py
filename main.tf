@@ -1,5 +1,5 @@
 provider "aws" {
-  region     = "us-east-1"
+  region     = "us-west-1"
  }
 # Defining CIDR Block for VPC
 variable "vpc_cidr" {
@@ -24,7 +24,7 @@ resource "aws_vpc" "main" {
 resource "aws_subnet" "main" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = var.subnet_cidr
-  availability_zone = "us-east-1a"
+  availability_zone = "us-west-1a"
   tags = {
     Name = "subnet"
   }
@@ -65,8 +65,8 @@ resource "aws_security_group" "py_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
-    from_port   = 8000
-    to_port     = 8000
+    from_port   = 7000
+    to_port     = 7000
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -98,9 +98,9 @@ resource "aws_security_group" "py_sg" {
 
 # Creating EC2 Instance
 resource "aws_instance" "Terraform" {
-  ami                         = "ami-0e001c9271cf7f3b9"
+  ami                         = "ami-0ca1f30768d0cf0e1"
   instance_type               = "t2.micro"
-  key_name                    = "hema2495-key"
+  key_name                    = "k8"
   vpc_security_group_ids      = [aws_security_group.py_sg.id]
   subnet_id                   = aws_subnet.main.id
   associate_public_ip_address = true
@@ -118,5 +118,5 @@ output "public_ip" {
 
 # Variable for AWS region
 variable "region" {
-  default = "us-east-1"
+  default = "us-west-1"
 }
